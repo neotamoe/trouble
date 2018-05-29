@@ -37,3 +37,13 @@ function toggle(id) {
         console.log(players);
     }
 }
+
+function play(players) {
+    console.log(players);
+    $('.players').attr('disabled', true);
+    for (var i = 0; i < players.length; i++) {
+        var element = document.getElementsByClassName(players[i]);
+        element[0].classList.remove('notPlaying');        
+    }
+    
+}

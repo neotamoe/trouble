@@ -70,3 +70,7 @@ h3 {
 input {
     margin-left: 15px;
 }
+
+.notPlaying {
+    opacity: 0.4;
+}

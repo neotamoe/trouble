@@ -20,11 +20,12 @@
         <input class="players" type="checkbox" id="red" onclick="toggle(id)">Red
         <input class="players" type="checkbox" id="green" onclick="toggle(id)">Green
         <input class="players" type="checkbox" id="yellow" onclick="toggle(id)">Yellow
+        <button onclick="play(players)">Play</button>
     </div>
     <div>
         <table>
             <tr>
-                <td class="home blue"><p>HOME<br><span id="blueCount"></span></p></td>
+                <td class="home blue notPlaying"><p>HOME<br><span id="blueCount"></span></p></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -33,7 +34,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="home red"><p>HOME<br><span id="redCount"></span></p></td>
+                <td class="home red notPlaying"><p>HOME<br><span id="redCount"></span></p></td>
             </tr>
             <tr>
                 <td></td>
@@ -130,7 +131,7 @@
                 <td></td>
             </tr>  
             <tr>
-                <td class="home green"><p>HOME<br><span id="greenCount"></span></p></td>
+                <td class="home green notPlaying"><p>HOME<br><span id="greenCount"></span></p></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -139,7 +140,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="home yellow"><p>HOME<br><span id="yellowCount"></span></p></td>
+                <td class="home yellow notPlaying"><p>HOME<br><span id="yellowCount"></span></p></td>
             </tr>
         </table>
     </div>
