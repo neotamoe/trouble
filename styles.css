@@ -1,0 +1,72 @@
+td {
+    width: 100px;
+    height: 100px;
+}
+
+table {
+    border: 2px solid;
+    padding: 20px;
+    margin-top: 20px;
+} 
+
+.blue {
+    background-color: blue;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.home {
+    text-align: center;
+}
+
+#popper {
+    text-align: center;
+    color: purple;
+}
+
+#btnPopper{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    border: 5px solid black;
+    font-size: 48px;
+    color: white;
+    background-color: purple;
+}
+
+#btnPopper:focus {
+    outline: none;
+}
+
+.path {
+    background-color: lightgrey;
+}
+
+td.blue, td.green, td.red, td.yellow, td.path {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.home {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h3 {
+    display: inline;
+}
+
+input {
+    margin-left: 15px;
+}

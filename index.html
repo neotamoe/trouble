@@ -1,0 +1,148 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trouble</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="scripts.js"></script>
+</head>
+
+<body>
+    <div>
+        <h1>Trouble</h1>
+        <h3>Select Players:</h3>
+        <input class="players" type="checkbox" id="blue" onclick="toggle(id)">Blue
+        <input class="players" type="checkbox" id="red" onclick="toggle(id)">Red
+        <input class="players" type="checkbox" id="green" onclick="toggle(id)">Green
+        <input class="players" type="checkbox" id="yellow" onclick="toggle(id)">Yellow
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td class="home blue"><p>HOME<br><span id="blueCount"></span></p></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="home red"><p>HOME<br><span id="redCount"></span></p></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="blue" id="1">1-START</td>
+                <td id="2" class="path">2</td>
+                <td id="3" class="path">3</td>
+                <td id="4" class="path">4</td>
+                <td id="5" class="path">5</td>            
+                <td id="6" class="path">6</td>
+                <td class="red" id="7">7</td>
+                <td class="red" id="8">8-START</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="blue" id="28">28</td>
+                <td id="28A" class="blue">28A</td>
+                <td id="28B" class="blue">28B</td>
+                <td id="28C" class="blue">28C</td>
+                <td id="28D" class="blue">28D</td>
+                <td></td>
+                <td id="7A" class="red" >7A</td>
+                <td id="9" class="path">9</td>
+                <td></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td id="27" class="path">27</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="7B" class="red" >7B</td>
+                <td id="10" class="path">10</td>
+                <td></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td id="26" class="path">26</td>
+                <td id="21D" class="green">21D</td>
+                <td></td>
+                <td id="popper" colspan=2 rowspan=2><button id="btnPopper" onclick="popIt()" value=""></button></td>
+                <td></td>
+                <td id="7C" class="red" >7C</td>
+                <td id="11" class="path">11</td>
+                <td></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td id="25" class="path">25</td>
+                <td id="21C" class="green">21C</td>
+                <td></td>
+                <td></td>
+                <td id="7D" class="red" >7D</td>
+                <td id="12" class="path">12</td>
+                <td></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td id="24" class="path">24</td>
+                <td id="21B" class="green">21B</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="13" class="path">13</td>
+                <td></td>
+            </tr>        
+            <tr>       
+                <td></td>
+                <td id="23" class="path">23</td>
+                <td id="21A" class="green">21A</td>
+                <td></td>
+                <td id="14D" class="yellow">14D</td>
+                <td id="14C" class="yellow">14C</td>
+                <td id="14B" class="yellow">14B</td>
+                <td id="14A" class="yellow">14A</td>
+                <td id="14" class="yellow">14</td>
+                <td></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td id="22" class="green">22-START</td>
+                <td id="21" class="green">21</td>
+                <td id="20" class="path">20</td>
+                <td id="19" class="path">19</td>
+                <td id="18" class="path">18</td>
+                <td id="17" class="path">17</td>
+                <td id="16" class="path">16</td>
+                <td id="15" class="yellow">15-START</td>
+
+                <td></td>
+            </tr>  
+            <tr>
+                <td class="home green"><p>HOME<br><span id="greenCount"></span></p></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="home yellow"><p>HOME<br><span id="yellowCount"></span></p></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
