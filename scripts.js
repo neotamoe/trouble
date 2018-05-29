@@ -45,5 +45,19 @@ function play(players) {
         var element = document.getElementsByClassName(players[i]);
         element[0].classList.remove('notPlaying');        
     }
-    
 }
+
+function Player(color, startSquare, homeRow) {
+    this.color = color;
+    this.startSquare = startSquare;
+    this.homeRow = homeRow;
+}
+
+var bluePlayer = new Player('blue', 1, ['29', '30', '31', '32']);
+var redPlayer = new Player('red', 8, ['8','9','10','11']);
+var yellowPlayer = new Player('yellow', 15, ['15','16','17','18']);
+var greenPlayer = new Player('green', 22, ['22','23','24','25']);
+
+// Player.prototype.functionNameHere = function () {
+
+// }
