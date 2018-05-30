@@ -2,7 +2,7 @@ function popIt() {
     if(!this.currentPlayer){
         return;
     }
-    console.log("dice rolled for " + this.currentPlayer);
+    console.log("dice rolled for " + this.currentPlayer.color);
     var die = 1 + Math.floor(Math.random() * 6);
     popperDisplay = die;
     console.log(popperDisplay);
@@ -11,31 +11,31 @@ function popIt() {
         // player able to move out of home or move 6 spaces
         document.getElementById("instructions").innerHTML = "Click home to move a piece into play OR click the piece you want to move.";
         setTimeout(clearInstructions,1000);
+        resetPopper();
     } else {
-        // if(this.currentPlayer.hasTokensOut){
+        if(this.currentPlayer.hasTokensOut){
             // select token to move
             document.getElementById("instructions").innerHTML = "Click the piece you want to move.";
             setTimeout(clearInstructions,1000);
-
-        // } else {
-        //     // end of turn, trigger next player
-        //     document.getElementById("instructions").innerHTML = "";
             resetPopper();
-        // }
+        } else {
+            // end of turn, trigger next player
+            document.getElementById("instructions").innerHTML = "";
+            resetPopper();
+        }
     }
-    var index = this.fullPlayers.findIndex(player => player.color === this.currentPlayer);
+    var index = this.fullPlayers.findIndex(player => player.color === this.currentPlayer.color);
     console.log(index);
     if(index == this.players.length-1){
         $('#currentPlayer').removeClass(this.fullPlayers[index].color);
-        this.currentPlayer = this.fullPlayers[0].color;
+        this.currentPlayer = this.fullPlayers[0];
         $('#currentPlayer').addClass(this.fullPlayers[0].color);
     } else {
         $('#currentPlayer').removeClass(this.fullPlayers[index].color);
-        this.currentPlayer = this.fullPlayers[index+1].color;
+        this.currentPlayer = this.fullPlayers[index+1];
         $('#currentPlayer').addClass(this.fullPlayers[index+1].color);
     }
     
-    // setTimeout(resetPopper,1000);
 }
 
 var popperDisplay="POP";
@@ -103,7 +103,7 @@ function play(players) {
     }
     $('#currentPlayer').addClass(players[0]);
     document.getElementById("instructions").innerHTML = "";
-    this.currentPlayer = this.fullPlayers[0].color;
+    this.currentPlayer = this.fullPlayers[0];
 }
 
 function Player(color, startSquare, homeRow) {
