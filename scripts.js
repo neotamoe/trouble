@@ -24,18 +24,11 @@ function popIt() {
             resetPopper();
         }
     }
-    var index = this.fullPlayers.findIndex(player => player.color === this.currentPlayer.color);
-    console.log(index);
-    if(index == this.players.length-1){
-        $('#currentPlayer').removeClass(this.fullPlayers[index].color);
-        this.currentPlayer = this.fullPlayers[0];
-        $('#currentPlayer').addClass(this.fullPlayers[0].color);
+    if(gameHasWinner){
+        document.getElementById("instructions").innerHTML = "GAME OVER -- " + winner + " wins!";
     } else {
-        $('#currentPlayer').removeClass(this.fullPlayers[index].color);
-        this.currentPlayer = this.fullPlayers[index+1];
-        $('#currentPlayer').addClass(this.fullPlayers[index+1].color);
+        getNextPlayer();
     }
-    
 }
 
 var popperDisplay="POP";
@@ -46,6 +39,8 @@ var redCount="4";
 var players = [];
 var currentPlayer = "";
 var fullPlayers = [];
+var gameHasWinner = false;
+var winner = "";
 
 $(document).ready(function(){
    $("#btnPopper").text(popperDisplay);
@@ -104,6 +99,20 @@ function play(players) {
     $('#currentPlayer').addClass(players[0]);
     document.getElementById("instructions").innerHTML = "";
     this.currentPlayer = this.fullPlayers[0];
+}
+
+function getNextPlayer() {
+    var index = this.fullPlayers.findIndex(player => player.color === this.currentPlayer.color);
+    console.log(index);
+    if(index == this.players.length-1){
+        $('#currentPlayer').removeClass(this.fullPlayers[index].color);
+        this.currentPlayer = this.fullPlayers[0];
+        $('#currentPlayer').addClass(this.fullPlayers[0].color);
+    } else {
+        $('#currentPlayer').removeClass(this.fullPlayers[index].color);
+        this.currentPlayer = this.fullPlayers[index+1];
+        $('#currentPlayer').addClass(this.fullPlayers[index+1].color);
+    }
 }
 
 function Player(color, startSquare, homeRow) {
