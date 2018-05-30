@@ -74,3 +74,10 @@ input {
 .notPlaying {
     opacity: 0.4;
 }
+
+#currentPlayer {
+    display: inline-flex;
+    height: 25px;
+    width: 50px;
+    border: solid black 2px;
+}

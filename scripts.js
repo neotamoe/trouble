@@ -12,6 +12,7 @@ var blueCount="4";
 var greenCount="4";
 var redCount="4";
 var players = [];
+var currentPlayer = "";
 
 $(document).ready(function(){
    $("#btnPopper").text(popperText);
@@ -25,26 +26,32 @@ function resetPopper() {
     $("#btnPopper").text("POP");
 }
 
-function toggle(id) {
-    console.log(id);
-    if(!players.includes(id)){
-        players.push(id);
+function toggle(value) {
+    console.log(value);
+    if(!players.includes(value)){
+        players.push(value);
         console.log(players);
     } else {
-        var index = players.findIndex(player => player === id);
+        var index = players.findIndex(player => player === value);
         console.log(index);
-        players.splice(index, index+1);
+        players.splice(index, 1);
         console.log(players);
     }
 }
 
 function play(players) {
+    if(players.length<1){
+        return;
+    } 
     console.log(players);
-    $('.players').attr('disabled', true);
-    for (var i = 0; i < players.length; i++) {
-        var element = document.getElementsByClassName(players[i]);
-        element[0].classList.remove('notPlaying');        
+    $('input.players').attr('disabled', true);    
+    $('#btnPlay').attr('disabled', true);
+    for(var i=0; i < players.length; i++){
+        var element = document.getElementById(players[i]);
+        console.log(element);
+        element.classList.remove('notPlaying');
     }
+    $('#currentPlayer').addClass(players[0]);
 }
 
 function Player(color, startSquare, homeRow) {

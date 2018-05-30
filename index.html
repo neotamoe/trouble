@@ -16,16 +16,20 @@
     <div>
         <h1>Trouble</h1>
         <h3>Select Players:</h3>
-        <input class="players" type="checkbox" id="blue" onclick="toggle(id)">Blue
-        <input class="players" type="checkbox" id="red" onclick="toggle(id)">Red
-        <input class="players" type="checkbox" id="green" onclick="toggle(id)">Green
-        <input class="players" type="checkbox" id="yellow" onclick="toggle(id)">Yellow
-        <button onclick="play(players)">Play</button>
+        <input class="players" type="checkbox" value="blue" onclick="toggle(value)">Blue
+        <input class="players" type="checkbox" value="red" onclick="toggle(value)">Red
+        <input class="players" type="checkbox" value="yellow" onclick="toggle(value)">Yellow
+        <input class="players" type="checkbox" value="green" onclick="toggle(value)">Green
+        <button id="btnPlay" onclick="play(players)">Play</button>
+        <div>
+            <h3>Current Player:</h3>
+            <div id="currentPlayer"></div>
+        </div>
     </div>
     <div>
         <table>
             <tr>
-                <td class="home blue notPlaying"><p>HOME<br><span id="blueCount"></span></p></td>
+                <td id="blue" class="home blue notPlaying"><p>HOME<br><span id="blueCount"></span></p></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -34,7 +38,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="home red notPlaying"><p>HOME<br><span id="redCount"></span></p></td>
+                <td id="red" class="home red notPlaying"><p>HOME<br><span id="redCount"></span></p></td>
             </tr>
             <tr>
                 <td></td>
@@ -131,7 +135,7 @@
                 <td></td>
             </tr>  
             <tr>
-                <td class="home green notPlaying"><p>HOME<br><span id="greenCount"></span></p></td>
+                <td id="green" class="home green notPlaying"><p>HOME<br><span id="greenCount"></span></p></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -140,7 +144,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="home yellow notPlaying"><p>HOME<br><span id="yellowCount"></span></p></td>
+                <td id="yellow" class="home yellow notPlaying"><p>HOME<br><span id="yellowCount"></span></p></td>
             </tr>
         </table>
     </div>
