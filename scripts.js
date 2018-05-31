@@ -117,17 +117,16 @@ function getNextPlayer() {
 
 function clickOnHome(element){
     if(this.currentPlayer.color!==element.id){
-        console.log('not your turn!');
         document.getElementById("instructions").innerHTML = "It is " + this.currentPlayer.color + "'s turn.";
         return;
     }
-    console.log('home clicked for ' + element.id);
     var color = element.id;
     switch(color){
         case "blue":
             if(this.blueCount>0){
                 this.blueCount--;
                 $("#blueCount").text(this.blueCount);
+                placePieceOnStart("blue");
             } else {
                 document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
             }
@@ -163,6 +162,33 @@ function clickOnHome(element){
 
 }
 
+function placePieceOnStart(startColor) {
+    console.log('in placePieceOnStart function: ' + startColor);
+    var startGameSquare = this.gameSquares.find(gameSquare => gameSquare.color===startColor && gameSquare.isStart===true);
+    console.log(startGameSquare);
+    startGameSquare.isOccupied = true;
+    console.log(startGameSquare);
+    var id = startGameSquare.id;
+    
+    switch(startColor) {
+        case "blue":
+            $('#'+id).append('<div class="occupied-blue"></div>');
+            break;
+        case "red":
+            $('#'+id).append('<div class="occupied-red"></div>');
+
+            break;
+        case "yellow":
+            $('#'+id).append('<div class="occupied-yellow"></div>');
+
+            break;
+        case "green":
+            $('#'+id).append('<div class="occupied-green"></div>');
+
+            break;
+    }
+}
+
 function Player(color, startSquare, homeRow) {
     this.color = color;
     this.startSquare = startSquare;
@@ -171,11 +197,322 @@ function Player(color, startSquare, homeRow) {
     this.numberOfTokensOut = 0;
 }
 
-var bluePlayer = new Player('blue', 1, ['29', '30', '31', '32']);
-var redPlayer = new Player('red', 8, ['8','9','10','11']);
-var yellowPlayer = new Player('yellow', 15, ['15','16','17','18']);
-var greenPlayer = new Player('green', 22, ['22','23','24','25']);
+var bluePlayer = new Player('blue', 1, [281, 282, 283, 284]);
+var redPlayer = new Player('red', 8, [71, 72, 73, 74]);
+var yellowPlayer = new Player('yellow', 15, [141, 142, 143, 144]);
+var greenPlayer = new Player('green', 22, [211, 212, 213, 214]);
 
 // Player.prototype.functionNameHere = function () {
 
 // }
+
+var gameSquares = [
+    {
+        id: 1,
+        color: "blue",
+        isStart: true,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 2,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 3,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 4,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 5,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 6,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 7,
+        color: "red",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 71,
+        color: "red",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 72,
+        color: "red",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 73,
+        color: "red",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 74,
+        color: "red",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 8,
+        color: "red",
+        isStart: true,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 9,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 10,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 11,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 12,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 13,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 14,
+        color: "yellow",
+        isStart: true,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 141,
+        color: "yellow",
+        isStart: true,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 142,
+        color: "yellow",
+        isStart: true,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 143,
+        color: "yellow",
+        isStart: true,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 144,
+        color: "yellow",
+        isStart: true,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 15,
+        color: "yellow",
+        isStart: true,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 16,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 17,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 18,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 19,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 20,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 21,
+        color: "green",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 211,
+        color: "green",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 212,
+        color: "green",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 213,
+        color: "green",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 214,
+        color: "green",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 22,
+        color: "green",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 23,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 24,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 25,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 26,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 27,
+        color: "gray",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 28,
+        color: "blue",
+        isStart: false,
+        isHomeRow: false,
+        isOccupied: false,
+    },
+    {
+        id: 281,
+        color: "blue",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 282,
+        color: "blue",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 283,
+        color: "blue",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    },
+    {
+        id: 284,
+        color: "blue",
+        isStart: false,
+        isHomeRow: true,
+        isOccupied: false,
+    }
+]

@@ -85,3 +85,35 @@ input {
 #instructions {
     display: inline;
 }
+
+.occupied-blue {
+    border: solid 5px white;
+    background-color: blue;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.occupied-green {
+    border: solid 5px white;
+    background-color: green;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.occupied-red {
+    border: solid 5px white;
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.occupied-yellow {
+    border: solid 5px white;
+    background-color: yellow;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
