@@ -102,8 +102,8 @@ function play(players) {
 }
 
 function getNextPlayer() {
+    document.getElementById("instructions").innerHTML = "";
     var index = this.fullPlayers.findIndex(player => player.color === this.currentPlayer.color);
-    console.log(index);
     if(index == this.players.length-1){
         $('#currentPlayer').removeClass(this.fullPlayers[index].color);
         this.currentPlayer = this.fullPlayers[0];
@@ -135,6 +135,7 @@ function clickOnHome(element){
             if(this.redCount>0){
                 this.redCount--;
                 $("#redCount").text(this.redCount);
+                placePieceOnStart("red");
             } else {
                 document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
             }
@@ -143,6 +144,7 @@ function clickOnHome(element){
             if(this.yellowCount>0){
                 this.yellowCount--;
                 $("#yellowCount").text(this.yellowCount);
+                placePieceOnStart("yellow");
             } else {
                 document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
             }
@@ -151,6 +153,7 @@ function clickOnHome(element){
             if(this.greenCount>0){
                 this.greenCount--;
                 $("#greenCount").text(this.greenCount);
+                placePieceOnStart("green");
             } else {
                 document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
             }
@@ -158,7 +161,6 @@ function clickOnHome(element){
         // default:
         //     document.getElementById("instructions").innerHTML = "";
     }
-    console.log(this.blueCount);
 
 }
 
@@ -166,27 +168,57 @@ function placePieceOnStart(startColor) {
     console.log('in placePieceOnStart function: ' + startColor);
     var startGameSquare = this.gameSquares.find(gameSquare => gameSquare.color===startColor && gameSquare.isStart===true);
     console.log(startGameSquare);
+    var id = startGameSquare.id;
+    if(startGameSquare.isOccupied && startGameSquare.occupiedColor===startColor){
+        document.getElementById("instructions").innerHTML = "You already have a piece on start.  You cannot move another piece into play.";
+        return;
+    } 
+    if (startGameSquare.isOccupied && startGameSquare.occupiedColor!==startColor){
+        var opponentColor = startGameSquare.occupiedColor;
+        document.getElementById("instructions").innerHTML = opponentColor + " is sent back to home.";
+        switch(opponentColor){
+            case "blue":
+                this.blueCount++;
+                $("#blueCount").text(this.blueCount);
+                $('#'+id).remove('<div class="occupied-blue"></div>');
+                break;
+            case "red":
+                this.redCount++;
+                $("#redCount").text(this.redCount);
+                $('#'+id).remove('<div class="occupied-red"></div>');
+                break;
+            case "yellow":
+                this.yellowCount++;
+                $("#yellowCount").text(this.yellowCount);
+                $('#'+id).remove('<div class="occupied-yellow"></div>');
+                break;
+            case "green":
+                this.greenCount++;
+                $("#greenCount").text(this.greenCount);
+                $('#'+id).remove('<div class="occupied-green"></div>');
+                break;
+        }
+    }
     startGameSquare.isOccupied = true;
     console.log(startGameSquare);
-    var id = startGameSquare.id;
-    
     switch(startColor) {
         case "blue":
             $('#'+id).append('<div class="occupied-blue"></div>');
+            startGameSquare.occupiedColor="blue";
             break;
         case "red":
             $('#'+id).append('<div class="occupied-red"></div>');
-
+            startGameSquare.occupiedColor="red";
             break;
         case "yellow":
             $('#'+id).append('<div class="occupied-yellow"></div>');
-
+            startGameSquare.occupiedColor="yellow";
             break;
         case "green":
             $('#'+id).append('<div class="occupied-green"></div>');
-
+            startGameSquare.occupiedColor="green";
             break;
-    }
+    }    
 }
 
 function Player(color, startSquare, homeRow) {
@@ -213,6 +245,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 2,
@@ -220,6 +253,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 3,
@@ -227,6 +261,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 4,
@@ -234,6 +269,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 5,
@@ -241,6 +277,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 6,
@@ -248,6 +285,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 7,
@@ -255,6 +293,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 71,
@@ -262,6 +301,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 72,
@@ -269,6 +309,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 73,
@@ -276,6 +317,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 74,
@@ -283,6 +325,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 8,
@@ -290,6 +333,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 9,
@@ -297,6 +341,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 10,
@@ -304,6 +349,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 11,
@@ -311,6 +357,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 12,
@@ -318,6 +365,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 13,
@@ -325,6 +373,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 14,
@@ -332,6 +381,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 141,
@@ -339,6 +389,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 142,
@@ -346,6 +397,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 143,
@@ -353,6 +405,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 144,
@@ -360,6 +413,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 15,
@@ -367,6 +421,7 @@ var gameSquares = [
         isStart: true,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 16,
@@ -374,6 +429,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 17,
@@ -381,6 +437,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 18,
@@ -388,6 +445,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 19,
@@ -395,6 +453,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 20,
@@ -402,6 +461,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 21,
@@ -409,6 +469,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 211,
@@ -416,6 +477,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 212,
@@ -423,6 +485,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 213,
@@ -430,6 +493,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 214,
@@ -437,6 +501,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 22,
@@ -444,6 +509,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 23,
@@ -451,6 +517,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 24,
@@ -458,6 +525,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 25,
@@ -465,6 +533,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 26,
@@ -472,6 +541,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 27,
@@ -479,6 +549,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 28,
@@ -486,6 +557,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: false,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 281,
@@ -493,6 +565,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 282,
@@ -500,6 +573,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 283,
@@ -507,6 +581,7 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     },
     {
         id: 284,
@@ -514,5 +589,6 @@ var gameSquares = [
         isStart: false,
         isHomeRow: true,
         isOccupied: false,
+        occupiedColor: "",
     }
 ]
