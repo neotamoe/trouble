@@ -115,6 +115,54 @@ function getNextPlayer() {
     }
 }
 
+function clickOnHome(element){
+    if(this.currentPlayer.color!==element.id){
+        console.log('not your turn!');
+        document.getElementById("instructions").innerHTML = "It is " + this.currentPlayer.color + "'s turn.";
+        return;
+    }
+    console.log('home clicked for ' + element.id);
+    var color = element.id;
+    switch(color){
+        case "blue":
+            if(this.blueCount>0){
+                this.blueCount--;
+                $("#blueCount").text(this.blueCount);
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
+            break;
+        case "red":
+            if(this.redCount>0){
+                this.redCount--;
+                $("#redCount").text(this.redCount);
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
+            break;
+        case "yellow":
+            if(this.yellowCount>0){
+                this.yellowCount--;
+                $("#yellowCount").text(this.yellowCount);
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
+            break;
+        case "green":
+            if(this.greenCount>0){
+                this.greenCount--;
+                $("#greenCount").text(this.greenCount);
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
+            break;
+        // default:
+        //     document.getElementById("instructions").innerHTML = "";
+    }
+    console.log(this.blueCount);
+
+}
+
 function Player(color, startSquare, homeRow) {
     this.color = color;
     this.startSquare = startSquare;
