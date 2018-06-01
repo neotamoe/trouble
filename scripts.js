@@ -260,9 +260,11 @@ function getDestinationGameSquare(currentSquareId, end){
         case "blue":
             if(end>28){
                 var homeSlot = end-28;
-                // TODO: still need to make sure land by exact count only && not go past 4 home squares && spot isn't occupied
-                destinationId = 280 + homeSlot; 
-                console.log(destinationId);
+                if(homeSlot>4){
+                    document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
+                } else {
+                    destinationId = 280 + homeSlot;     
+                }
             } else {
                 destinationId = end;
             }
@@ -272,7 +274,11 @@ function getDestinationGameSquare(currentSquareId, end){
                 destinationId = end - 28;
             } else if(end>7){
                 var homeSlot = end-7;
-                destinationId = 70 + homeSlot; 
+                if(homeSlot>4){
+                    document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
+                } else {
+                    destinationId = 70 + homeSlot; 
+                }
             } else {
                 destinationId = end;
             }
@@ -282,7 +288,11 @@ function getDestinationGameSquare(currentSquareId, end){
                 destinationId = end - 28;
             } else if(end>14){
                 var homeSlot = end-14;
-                destinationId = 140 + homeSlot; 
+                if(homeSlot>4){
+                    document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
+                } else {
+                    destinationId = 140 + homeSlot; 
+                }
             } else {
                 destinationId = end;
             }
@@ -292,7 +302,11 @@ function getDestinationGameSquare(currentSquareId, end){
                 destinationId = end - 28;
             } else if(end>21){
                 var homeSlot = end-21;
-                destinationId = 210 + homeSlot; 
+                if(homeSlot>4){
+                    document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
+                } else {
+                    destinationId = 210 + homeSlot; 
+                }
             } else {
                 destinationId = end;
             }
