@@ -23,7 +23,6 @@ function popIt() {
     }
     var die = 1 + Math.floor(Math.random() * 6);
     popperDisplay = die;
-    console.log(popperDisplay);
     $("#btnPopper").text(popperDisplay);
     if(popperDisplay === 6){
         // player able to move out of home or move 6 spaces
@@ -51,12 +50,9 @@ function toggle(value) {
     console.log(value);
     if(!players.includes(value)){
         players.push(value);
-        console.log(players);
     } else {
         var index = players.findIndex(player => player === value);
-        console.log(index);
         players.splice(index, 1);
-        console.log(players);
     }
 }
 
@@ -226,20 +222,20 @@ function placePieceOnStart(startColor) {
 
 function selectAndMovePiece(element){
     var token = document.getElementById(element.id).children[0].classList[0];
-    console.log(token);  // this gives me occupied-blue or occupied-red 
     if(currentPlayer.color!=token.substring(9)){
         document.getElementById("instructions").innerHTML = "You can't move another player's piece.  Choose a different piece or click 'End of Turn' button";
         return;
     }
-    console.log("you clicked on " + element.id);
     console.log(element);
     var start = element.id;
     var end = Number(element.id) + Number(this.popperDisplay);
-    console.log(end);
     var currentGameSquare = this.gameSquares.find(gameSquare => gameSquare.id==element.id);
     currentGameSquare.isOccupied = false;
     currentGameSquare.occupiedColor = "";
-    var destinationGameSquare = this.gameSquares.find(gameSquare => gameSquare.id==end);
+    var destinationGameSquare = getDestinationGameSquare(start, end);
+    console.log("end " + end);
+    console.log(destinationGameSquare);
+
     if(destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor==currentPlayer.color){
         document.getElementById("instructions").innerHTML = "You already occupy that square.  Choose a different piece or click 'End of Turn' button";
         return;
@@ -247,15 +243,63 @@ function selectAndMovePiece(element){
     else if (destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor!==currentPlayer.color){
         var opponentColor = destinationGameSquare.occupiedColor;
         returnOpponentToHome(opponentColor, destinationGameSquare.id);
-    } 
+    }
+
     destinationGameSquare.isOccupied = true;
     destinationGameSquare.occupiedColor = token.substring(9);
-    console.log(destinationGameSquare.occupiedColor);
-    var occupiedColor = "occupied-"+destinationGameSquare.occupiedColor;
+
+    var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
     var currentSquareElement = document.getElementById(currentGameSquare.id);
-    console.log(currentSquareElement);
     currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-    $('#'+end).append('<div class="'+occupiedColor+'"></div>');
+    $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
+}
+
+function getDestinationGameSquare(currentSquareId, end){
+    var destinationId = 0;
+    switch(currentPlayer.color) {
+        case "blue":
+            if(end>28){
+                var homeSlot = end-28;
+                // TODO: still need to make sure land by exact count only && not go past 4 home squares && spot isn't occupied
+                destinationId = 280 + homeSlot; 
+                console.log(destinationId);
+            } else {
+                destinationId = end;
+            }
+            break;
+        case "red":
+            if(end>28){
+                destinationId = end - 28;
+            } else if(end>7){
+                var homeSlot = end-7;
+                destinationId = 70 + homeSlot; 
+            } else {
+                destinationId = end;
+            }
+            break;
+        case "yellow":
+            if(end>28){
+                destinationId = end - 28;
+            } else if(end>14){
+                var homeSlot = end-14;
+                destinationId = 140 + homeSlot; 
+            } else {
+                destinationId = end;
+            }
+            break;
+        case "green":
+            if(end>28){
+                destinationId = end - 28;
+            } else if(end>21){
+                var homeSlot = end-21;
+                destinationId = 210 + homeSlot; 
+            } else {
+                destinationId = end;
+            }
+            break;
+    }     
+    var destinationGameSquare = this.gameSquares.find(gameSquare => gameSquare.id==destinationId);
+    return destinationGameSquare;
 }
 
 function returnOpponentToHome(opponentColor, opponentSquareId) {
