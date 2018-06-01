@@ -125,3 +125,7 @@ button:focus {
 button {
     margin: 10px;
 }
+
+.start {
+    border: 3px dashed black;
+}

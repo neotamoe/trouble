@@ -2,13 +2,13 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trouble</title>
-  <meta name="trouble game code challenge" content="Trouble Game">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="scripts.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trouble</title>
+    <meta name="trouble game code challenge" content="Trouble Game">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts.js"></script>
 </head>
 
 <body>
@@ -47,95 +47,95 @@
             </tr>
             <tr>
                 <td></td>
-                <td class="blue" id="1" onclick="moveSelectedPiece(this)"></td>
-                <td id="2" class="path" onclick="moveSelectedPiece(this)">2</td>
-                <td id="3" class="path" onclick="moveSelectedPiece(this)">3</td>
-                <td id="4" class="path" onclick="moveSelectedPiece(this)">4</td>
-                <td id="5" class="path" onclick="moveSelectedPiece(this)">5</td>            
-                <td id="6" class="path" onclick="moveSelectedPiece(this)">6</td>
-                <td class="red" id="7" onclick="moveSelectedPiece(this)">7</td>
-                <td class="red" id="8" onclick="moveSelectedPiece(this)">8-START</td>
+                <td class="blue start" id="1" onclick="selectAndMovePiece(this)"></td>
+                <td id="2" class="path" onclick="selectAndMovePiece(this)"></td>
+                <td id="3" class="path" onclick="selectAndMovePiece(this)"></td>
+                <td id="4" class="path" onclick="selectAndMovePiece(this)"></td>
+                <td id="5" class="path" onclick="selectAndMovePiece(this)"></td>            
+                <td id="6" class="path" onclick="selectAndMovePiece(this)"></td>
+                <td class="red" id="7" onclick="selectAndMovePiece(this)"></td>
+                <td class="red start" id="8" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
-                <td class="blue" id="28" onclick="moveSelectedPiece(this)">28</td>
-                <td id="281" class="blue" onclick="moveSelectedPiece(this)">281</td>
-                <td id="282" class="blue" onclick="moveSelectedPiece(this)">282</td>
-                <td id="283" class="blue" onclick="moveSelectedPiece(this)">283</td>
-                <td id="284" class="blue" onclick="moveSelectedPiece(this)">284</td>
+                <td class="blue" id="28" onclick="selectAndMovePiece(this)">28</td>
+                <td id="281" class="blue" onclick="selectAndMovePiece(this)">281</td>
+                <td id="282" class="blue" onclick="selectAndMovePiece(this)">282</td>
+                <td id="283" class="blue" onclick="selectAndMovePiece(this)">283</td>
+                <td id="284" class="blue" onclick="selectAndMovePiece(this)">284</td>
                 <td></td>
-                <td id="71" class="red" onclick="moveSelectedPiece(this)">71</td>
-                <td id="9" class="path" onclick="moveSelectedPiece(this)">9</td>
-                <td></td>
-            </tr>        
-            <tr>
-                <td></td>
-                <td id="27" class="path" onclick="moveSelectedPiece(this)">27</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td id="72" class="red" onclick="moveSelectedPiece(this)">72</td>
-                <td id="10" class="path" onclick="moveSelectedPiece(this)">10</td>
+                <td id="71" class="red" onclick="selectAndMovePiece(this)">71</td>
+                <td id="9" class="path" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>        
             <tr>
                 <td></td>
-                <td id="26" class="path" onclick="moveSelectedPiece(this)">26</td>
-                <td id="214" class="green" onclick="moveSelectedPiece(this)">214</td>
+                <td id="27" class="path" onclick="selectAndMovePiece(this)">27</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="72" class="red" onclick="selectAndMovePiece(this)">72</td>
+                <td id="10" class="path" onclick="selectAndMovePiece(this)"></td>
+                <td></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td id="26" class="path" onclick="selectAndMovePiece(this)">26</td>
+                <td id="214" class="green" onclick="selectAndMovePiece(this)">214</td>
                 <td></td>
                 <td id="popper" colspan=2 rowspan=2><button id="btnPopper" onclick="popIt()" value=""></button></td>
                 <td></td>
-                <td id="73" class="red" onclick="moveSelectedPiece(this)">73</td>
-                <td id="11" class="path" onclick="moveSelectedPiece(this)">11</td>
+                <td id="73" class="red" onclick="selectAndMovePiece(this)">73</td>
+                <td id="11" class="path" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>        
             <tr>
                 <td></td>
-                <td id="25" class="path" onclick="moveSelectedPiece(this)">25</td>
-                <td id="213" class="green" onclick="moveSelectedPiece(this)">213</td>
+                <td id="25" class="path" onclick="selectAndMovePiece(this)">25</td>
+                <td id="213" class="green" onclick="selectAndMovePiece(this)">213</td>
                 <td></td>
                 <td></td>
-                <td id="74" class="red" onclick="moveSelectedPiece(this)">74</td>
-                <td id="12" class="path" onclick="moveSelectedPiece(this)">12</td>
+                <td id="74" class="red" onclick="selectAndMovePiece(this)">74</td>
+                <td id="12" class="path" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>        
             <tr>
                 <td></td>
-                <td id="24" class="path" onclick="moveSelectedPiece(this)">24</td>
-                <td id="212" class="green" onclick="moveSelectedPiece(this)">212</td>
+                <td id="24" class="path" onclick="selectAndMovePiece(this)">24</td>
+                <td id="212" class="green" onclick="selectAndMovePiece(this)">212</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td id="13" class="path" onclick="moveSelectedPiece(this)">13</td>
+                <td id="13" class="path" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>        
             <tr>       
                 <td></td>
-                <td id="23" class="path" onclick="moveSelectedPiece(this)">23</td>
-                <td id="211" class="green" onclick="moveSelectedPiece(this)">211</td>
+                <td id="23" class="path" onclick="selectAndMovePiece(this)">23</td>
+                <td id="211" class="green" onclick="selectAndMovePiece(this)">211</td>
                 <td></td>
-                <td id="144" class="yellow" onclick="moveSelectedPiece(this)">144</td>
-                <td id="143" class="yellow" onclick="moveSelectedPiece(this)">143</td>
-                <td id="142" class="yellow" onclick="moveSelectedPiece(this)">142</td>
-                <td id="141" class="yellow" onclick="moveSelectedPiece(this)">141</td>
-                <td id="14" class="yellow" onclick="moveSelectedPiece(this)">14</td>
+                <td id="144" class="yellow" onclick="selectAndMovePiece(this)">144</td>
+                <td id="143" class="yellow" onclick="selectAndMovePiece(this)">143</td>
+                <td id="142" class="yellow" onclick="selectAndMovePiece(this)">142</td>
+                <td id="141" class="yellow" onclick="selectAndMovePiece(this)">141</td>
+                <td id="14" class="yellow" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>        
             <tr>
                 <td></td>
-                <td id="22" class="green" onclick="moveSelectedPiece(this)">22-START</td>
-                <td id="21" class="green" onclick="moveSelectedPiece(this)">21</td>
-                <td id="20" class="path" onclick="moveSelectedPiece(this)">20</td>
-                <td id="19" class="path" onclick="moveSelectedPiece(this)">19</td>
-                <td id="18" class="path" onclick="moveSelectedPiece(this)">18</td>
-                <td id="17" class="path" onclick="moveSelectedPiece(this)">17</td>
-                <td id="16" class="path" onclick="moveSelectedPiece(this)">16</td>
-                <td id="15" class="yellow" onclick="moveSelectedPiece(this)">15-START</td>
+                <td id="22" class="green start" onclick="selectAndMovePiece(this)">22-START</td>
+                <td id="21" class="green" onclick="selectAndMovePiece(this)">21</td>
+                <td id="20" class="path" onclick="selectAndMovePiece(this)">20</td>
+                <td id="19" class="path" onclick="selectAndMovePiece(this)">19</td>
+                <td id="18" class="path" onclick="selectAndMovePiece(this)">18</td>
+                <td id="17" class="path" onclick="selectAndMovePiece(this)">17</td>
+                <td id="16" class="path" onclick="selectAndMovePiece(this)">16</td>
+                <td id="15" class="yellow start" onclick="selectAndMovePiece(this)"></td>
                 <td></td>
             </tr>  
             <tr>
