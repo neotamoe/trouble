@@ -27,6 +27,7 @@ function popIt() {
     }
     var die = 1 + Math.floor(Math.random() * 6);
     popperDisplay = die;
+    console.log(popperDisplay);
     $("#btnPopper").text(popperDisplay);
     if(popperDisplay === 6){
         // player able to move out of home or move 6 spaces
@@ -115,45 +116,7 @@ function clickOnHome(element){
     } else if(popperDisplay!==6){
         document.getElementById("instructions").innerHTML = "You must get a 6 to move a piece out of home.";
     } else {
-        var color = element.id;
-        switch(color){
-            case "blue":
-                if(this.blueCount>0){
-                    this.blueCount--;
-                    $("#blueCount").text(this.blueCount);
-                    placePieceOnStart("blue");
-                } else {
-                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-                }
-                break;
-            case "red":
-                if(this.redCount>0){
-                    this.redCount--;
-                    $("#redCount").text(this.redCount);
-                    placePieceOnStart("red");
-                } else {
-                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-                }
-                break;
-            case "yellow":
-                if(this.yellowCount>0){
-                    this.yellowCount--;
-                    $("#yellowCount").text(this.yellowCount);
-                    placePieceOnStart("yellow");
-                } else {
-                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-                }
-                break;
-            case "green":
-                if(this.greenCount>0){
-                    this.greenCount--;
-                    $("#greenCount").text(this.greenCount);
-                    placePieceOnStart("green");
-                } else {
-                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-                }
-                break;
-        }
+        placePieceOnStart(element.id);
     }
 }
 
@@ -169,32 +132,68 @@ function placePieceOnStart(startColor) {
         document.getElementById("instructions").innerHTML = opponentColor + " is sent back to home.";
         returnOpponentToHome(opponentColor, id);
     }
-    startGameSquare.isOccupied = true;
     switch(startColor) {
         case "blue":
-            $('#'+id).append('<div class="occupied-blue"></div>');
-            startGameSquare.occupiedColor="blue";
+            if(this.blueCount>0){
+                this.blueCount--;
+                $("#blueCount").text(this.blueCount);
+                $('#'+id).append('<div class="occupied-blue"></div>');
+                startGameSquare.occupiedColor="blue";
+                startGameSquare.isOccupied = true;
+                this.currentPlayer.hasTokensOut = true;
+                document.getElementById("instructions").innerHTML = "Pop again";
+                noPopAllowed = false;
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
             break;
         case "red":
-            $('#'+id).append('<div class="occupied-red"></div>');
-            startGameSquare.occupiedColor="red";
+            if(this.redCount>0){
+                this.redCount--;
+                $("#redCount").text(this.redCount);
+                $('#'+id).append('<div class="occupied-red"></div>');
+                startGameSquare.occupiedColor="red";
+                startGameSquare.isOccupied = true;
+                this.currentPlayer.hasTokensOut = true;
+                document.getElementById("instructions").innerHTML = "Pop again";
+                noPopAllowed = false;
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
             break;
         case "yellow":
-            $('#'+id).append('<div class="occupied-yellow"></div>');
-            startGameSquare.occupiedColor="yellow";
+            if(this.yellowCount>0){
+                this.yellowCount--;
+                $("#yellowCount").text(this.yellowCount);
+                $('#'+id).append('<div class="occupied-yellow"></div>');
+                startGameSquare.occupiedColor="yellow";    
+                startGameSquare.isOccupied = true;
+                this.currentPlayer.hasTokensOut = true;
+                document.getElementById("instructions").innerHTML = "Pop again";
+                noPopAllowed = false;
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
             break;
         case "green":
-            $('#'+id).append('<div class="occupied-green"></div>');
-            startGameSquare.occupiedColor="green";
+            if(this.greenCount>0){
+                this.greenCount--;  
+                $("#greenCount").text(this.greenCount);
+                $('#'+id).append('<div class="occupied-green"></div>');
+                startGameSquare.occupiedColor="green";
+                startGameSquare.isOccupied = true;
+                this.currentPlayer.hasTokensOut = true;
+                document.getElementById("instructions").innerHTML = "Pop again";
+                noPopAllowed = false;
+            } else {
+                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+            }
             break;
     }    
-    this.currentPlayer.hasTokensOut = true;
-    document.getElementById("instructions").innerHTML = "Pop again";
-    noPopAllowed = true;
 }
 
 function selectAndMovePiece(element){
-    if(popperDisplay==6 && document.getElementById("instructions").innerHTML=="Pop again" && noPopAllowed){
+    if(popperDisplay==6 && document.getElementById("instructions").innerHTML=="Pop again"){
         return;
     }  
     var token = document.getElementById(element.id).children[0].classList[0];
