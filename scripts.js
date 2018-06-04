@@ -32,14 +32,16 @@ function popIt() {
     if(popperDisplay === 6){
         // player able to move out of home or move 6 spaces
         document.getElementById("instructions").innerHTML = "Click home to move a piece into play OR click the piece you want to move.  Then pop again.";
+        noPopAllowed = true;
     } else {
         if(this.currentPlayer.hasTokensOut){
             // select token to move
             document.getElementById("instructions").innerHTML = "Click the piece you want to move.";
+            noPopAllowed = true;
         } else {
             // end of turn, trigger next player
             document.getElementById("instructions").innerHTML = "You do not have any pieces to move.  Click 'End of Turn' button.";
-            noPopAllowed = true;
+            noPopAllowed = false;
         }
     }
 }
@@ -193,9 +195,12 @@ function placePieceOnStart(startColor) {
 }
 
 function selectAndMovePiece(element){
-    if(popperDisplay==6 && document.getElementById("instructions").innerHTML=="Pop again"){
+    // if(popperDisplay==6 && document.getElementById("instructions").innerHTML=="Pop again"){
+    //     return;
+    // }  // this won't allow for multiple 6s to be played
+    if(!noPopAllowed){
         return;
-    }  
+    }
     var token = document.getElementById(element.id).children[0].classList[0];
     if(currentPlayer.color!=token.substring(9)){
         document.getElementById("instructions").innerHTML = "You can't move another player's piece.  Choose a different piece or click 'End of Turn' button";
