@@ -272,7 +272,7 @@ function getDestinationGameSquare(currentSquareId, end){
         case "red":
             if(end>28){
                 destinationId = end - 28;
-            } else if(end>7){
+            } else if(end>7 && currentSquareId<7){
                 var homeSlot = end-7;
                 if(homeSlot>4){
                     document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
@@ -286,7 +286,7 @@ function getDestinationGameSquare(currentSquareId, end){
         case "yellow":
             if(end>28){
                 destinationId = end - 28;
-            } else if(end>14){
+            } else if(end>14 && currentSquareId<14){
                 var homeSlot = end-14;
                 if(homeSlot>4){
                     document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
@@ -300,7 +300,7 @@ function getDestinationGameSquare(currentSquareId, end){
         case "green":
             if(end>28){
                 destinationId = end - 28;
-            } else if(end>21){
+            } else if(end>21 && currentSquareId<21){
                 var homeSlot = end-21;
                 if(homeSlot>4){
                     document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
@@ -366,10 +366,6 @@ var bluePlayer = new Player('blue', 1, [281, 282, 283, 284]);
 var redPlayer = new Player('red', 8, [71, 72, 73, 74]);
 var yellowPlayer = new Player('yellow', 15, [141, 142, 143, 144]);
 var greenPlayer = new Player('green', 22, [211, 212, 213, 214]);
-
-// Player.prototype.functionNameHere = function () {
-
-// }
 
 var gameSquares = [
     {

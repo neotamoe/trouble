@@ -1,12 +1,18 @@
+body {
+    margin-left: 25px;
+}
+
 td {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 }
 
 table {
     border: 2px solid;
     padding: 20px;
     margin-top: 20px;
+    min-width: 800px;
+    min-height: 800px;
 } 
 
 .blue {
@@ -36,10 +42,10 @@ table {
 
 #btnPopper{
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     border: 5px solid black;
-    font-size: 48px;
+    font-size: 36px;
     color: white;
     background-color: purple;
 }
@@ -54,12 +60,12 @@ table {
 
 td.blue, td.green, td.red, td.yellow, td.path {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
 }
 
 .home {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -91,7 +97,7 @@ input {
     background-color: blue;
     width: 30px;
     height: 30px;
-    margin-left: 30px;
+    margin-left: 18px;
 }
 
 .occupied-green {
@@ -99,7 +105,7 @@ input {
     background-color: green;
     width: 30px;
     height: 30px;
-    margin-left: 30px;
+    margin-left: 18px;
 }
 
 .occupied-red {
@@ -107,7 +113,7 @@ input {
     background-color: red;
     width: 30px;
     height: 30px;
-    margin-left: 30px;
+    margin-left: 18px;
 }
 
 .occupied-yellow {
@@ -115,7 +121,7 @@ input {
     background-color: yellow;
     width: 30px;
     height: 30px;
-    margin-left: 30px;
+    margin-left: 18px;
 }
 
 button:focus {
