@@ -8,6 +8,7 @@ var currentPlayer = "";
 var fullPlayers = [];
 var gameHasWinner = false;
 var winner = "";
+var noPopAllowed = true;
 
 $(document).ready(function(){
     $("#btnPopper").text(popperDisplay);
@@ -19,6 +20,9 @@ $(document).ready(function(){
 
 function popIt() {
     if(!this.currentPlayer){
+        return;
+    }
+    if(noPopAllowed){
         return;
     }
     var die = 1 + Math.floor(Math.random() * 6);
@@ -34,6 +38,7 @@ function popIt() {
         } else {
             // end of turn, trigger next player
             document.getElementById("instructions").innerHTML = "You do not have any pieces to move.  Click 'End of Turn' button.";
+            noPopAllowed = true;
         }
     }
 }
@@ -85,6 +90,7 @@ function play(players) {
     document.getElementById("instructions").innerHTML = "";
     this.currentPlayer = this.fullPlayers[0];
     $('#btnEndOfTurn').removeAttr("disabled");
+    noPopAllowed = false;
 }
 
 function getNextPlayer() {
@@ -98,57 +104,56 @@ function getNextPlayer() {
         this.currentPlayer = this.fullPlayers[index+1];
         $('#currentPlayer').addClass(this.fullPlayers[index+1].color);
     }
+    noPopAllowed = false;
     document.getElementById("instructions").innerHTML = "Pop it!";
     resetPopper();
 }
 
 function clickOnHome(element){
-    if(popperDisplay!==6){
-        document.getElementById("instructions").innerHTML = "You must get a 6 to move a piece out of home.";
-        return;
-    }
     if(this.currentPlayer.color!==element.id){
         document.getElementById("instructions").innerHTML = "It is " + this.currentPlayer.color + "'s turn.";
-        return;
-    }
-    var color = element.id;
-    switch(color){
-        case "blue":
-            if(this.blueCount>0){
-                this.blueCount--;
-                $("#blueCount").text(this.blueCount);
-                placePieceOnStart("blue");
-            } else {
-                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-            }
-            break;
-        case "red":
-            if(this.redCount>0){
-                this.redCount--;
-                $("#redCount").text(this.redCount);
-                placePieceOnStart("red");
-            } else {
-                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-            }
-            break;
-        case "yellow":
-            if(this.yellowCount>0){
-                this.yellowCount--;
-                $("#yellowCount").text(this.yellowCount);
-                placePieceOnStart("yellow");
-            } else {
-                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-            }
-            break;
-        case "green":
-            if(this.greenCount>0){
-                this.greenCount--;
-                $("#greenCount").text(this.greenCount);
-                placePieceOnStart("green");
-            } else {
-                document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
-            }
-            break;
+    } else if(popperDisplay!==6){
+        document.getElementById("instructions").innerHTML = "You must get a 6 to move a piece out of home.";
+    } else {
+        var color = element.id;
+        switch(color){
+            case "blue":
+                if(this.blueCount>0){
+                    this.blueCount--;
+                    $("#blueCount").text(this.blueCount);
+                    placePieceOnStart("blue");
+                } else {
+                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+                }
+                break;
+            case "red":
+                if(this.redCount>0){
+                    this.redCount--;
+                    $("#redCount").text(this.redCount);
+                    placePieceOnStart("red");
+                } else {
+                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+                }
+                break;
+            case "yellow":
+                if(this.yellowCount>0){
+                    this.yellowCount--;
+                    $("#yellowCount").text(this.yellowCount);
+                    placePieceOnStart("yellow");
+                } else {
+                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+                }
+                break;
+            case "green":
+                if(this.greenCount>0){
+                    this.greenCount--;
+                    $("#greenCount").text(this.greenCount);
+                    placePieceOnStart("green");
+                } else {
+                    document.getElementById("instructions").innerHTML = "You do not have any more pieces to move out of home";
+                }
+                break;
+        }
     }
 }
 
@@ -163,40 +168,6 @@ function placePieceOnStart(startColor) {
         var opponentColor = startGameSquare.occupiedColor;
         document.getElementById("instructions").innerHTML = opponentColor + " is sent back to home.";
         returnOpponentToHome(opponentColor, id);
-        // switch(opponentColor){
-        //     case "blue":
-        //         this.blueCount++;
-        //         $("#blueCount").text(this.blueCount);
-        //         $('#'+id).remove('<div class="occupied-blue"></div>');
-        //         if(this.blueCount===4){
-        //             this.bluePlayer.hasTokensOut = false;
-        //         }
-        //         break;
-        //     case "red":
-        //         this.redCount++;
-        //         $("#redCount").text(this.redCount);
-        //         $('#'+id).remove('<div class="occupied-red"></div>');
-        //         if(this.redCount===4){
-        //             this.redPlayer.hasTokensOut = false;
-        //         }
-        //         break;
-        //     case "yellow":
-        //         this.yellowCount++;
-        //         $("#yellowCount").text(this.yellowCount);
-        //         $('#'+id).remove('<div class="occupied-yellow"></div>');
-        //         if(this.yellowCount===4){
-        //             this.yellowPlayer.hasTokensOut = false;
-        //         }
-        //         break;
-        //     case "green":
-        //         this.greenCount++;
-        //         $("#greenCount").text(this.greenCount);
-        //         $('#'+id).remove('<div class="occupied-green"></div>');
-        //         if(this.greenCount===4){
-        //             this.greenPlayer.hasTokensOut = false;
-        //         }
-        //         break;
-        // }
     }
     startGameSquare.isOccupied = true;
     switch(startColor) {
@@ -218,9 +189,14 @@ function placePieceOnStart(startColor) {
             break;
     }    
     this.currentPlayer.hasTokensOut = true;
+    document.getElementById("instructions").innerHTML = "Pop again";
+    noPopAllowed = true;
 }
 
 function selectAndMovePiece(element){
+    if(popperDisplay==6 && document.getElementById("instructions").innerHTML=="Pop again" && noPopAllowed){
+        return;
+    }  
     var token = document.getElementById(element.id).children[0].classList[0];
     if(currentPlayer.color!=token.substring(9)){
         document.getElementById("instructions").innerHTML = "You can't move another player's piece.  Choose a different piece or click 'End of Turn' button";
@@ -252,25 +228,39 @@ function selectAndMovePiece(element){
     var currentSquareElement = document.getElementById(currentGameSquare.id);
     currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
     $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
+    if(popperDisplay==6){
+        document.getElementById("instructions").innerHTML = "Pop again";
+        noPopAllowed = true;
+    }
+    if(popperDisplay!=6){
+        document.getElementById("instructions").innerHTML = "Click 'End of Turn' button";
+        noPopAllowed = true;
+    }
 }
 
 function getDestinationGameSquare(currentSquareId, end){
     var destinationId = 0;
     switch(currentPlayer.color) {
         case "blue":
-            if(end>28){
+            if(end>28 && currentSquareId<=28){
                 var homeSlot = end-28;
                 if(homeSlot>4){
                     document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
                 } else {
                     destinationId = 280 + homeSlot;     
                 }
+            } else if (currentSquareId>=281){
+                if(end>284){
+                    document.getElementById("instructions").innerHTML = "You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button";
+                } else {
+                    destinationId = end;
+                }
             } else {
                 destinationId = end;
             }
             break;
         case "red":
-            if(end>28){
+            if(end>28 && currentSquareId<=28){
                 destinationId = end - 28;
             } else if(end>7 && currentSquareId<7){
                 var homeSlot = end-7;
@@ -279,12 +269,18 @@ function getDestinationGameSquare(currentSquareId, end){
                 } else {
                     destinationId = 70 + homeSlot; 
                 }
+            } else if (currentSquareId>=71){
+                if(end>74){
+                    document.getElementById("instructions").innerHTML = "You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button";
+                } else {
+                    destinationId = end;
+                } 
             } else {
                 destinationId = end;
             }
             break;
         case "yellow":
-            if(end>28){
+            if(end>28 && currentSquareId<=28){
                 destinationId = end - 28;
             } else if(end>14 && currentSquareId<14){
                 var homeSlot = end-14;
@@ -293,12 +289,18 @@ function getDestinationGameSquare(currentSquareId, end){
                 } else {
                     destinationId = 140 + homeSlot; 
                 }
+            } else if (currentSquareId>=141){
+                if(end>144){
+                    document.getElementById("instructions").innerHTML = "You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button";
+                } else {
+                    destinationId = end;
+                } 
             } else {
                 destinationId = end;
             }
             break;
         case "green":
-            if(end>28){
+            if(end>28 && currentSquareId<=28){
                 destinationId = end - 28;
             } else if(end>21 && currentSquareId<21){
                 var homeSlot = end-21;
@@ -306,6 +308,12 @@ function getDestinationGameSquare(currentSquareId, end){
                     document.getElementById("instructions").innerHTML = "You must go into home by exact count.  Choose another piece to move or click 'End of Turn' button";
                 } else {
                     destinationId = 210 + homeSlot; 
+                }
+            } else if (currentSquareId>=211){
+                if(end>214){
+                    document.getElementById("instructions").innerHTML = "You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button";
+                } else {
+                    destinationId = end;
                 }
             } else {
                 destinationId = end;
