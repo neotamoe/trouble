@@ -209,14 +209,12 @@ function selectAndMovePiece(element){
         document.getElementById("instructions").innerHTML = "You can't move another player's piece.  Choose a different piece or click 'End of Turn' button";
         return;
     }
+    console.log("element to move: ");
     console.log(element);
     var start = element.id;
     var end = Number(element.id) + Number(this.popperDisplay);
-    var currentGameSquare = this.gameSquares.find(gameSquare => gameSquare.id==element.id);
-    currentGameSquare.isOccupied = false;
-    currentGameSquare.occupiedColor = "";
     var destinationGameSquare = getDestinationGameSquare(start, end);
-    console.log("end " + end);
+    console.log("destinationGameSquare: ");
     console.log(destinationGameSquare);
     if(destinationGameSquare!==undefined){
         if(destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor==currentPlayer.color){
@@ -224,19 +222,24 @@ function selectAndMovePiece(element){
             return;
         }
         else if (destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor!==currentPlayer.color){
+            var currentGameSquare = this.gameSquares.find(gameSquare => gameSquare.id==element.id);
+            currentGameSquare.isOccupied = false;
+            currentGameSquare.occupiedColor = "";
             var opponentColor = destinationGameSquare.occupiedColor;
             returnOpponentToHome(opponentColor, destinationGameSquare.id);
+            
             destinationGameSquare.isOccupied = true;
             destinationGameSquare.occupiedColor = token.substring(9);
-        
             var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
             var currentSquareElement = document.getElementById(currentGameSquare.id);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
             $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
         } else {
+            var currentGameSquare = this.gameSquares.find(gameSquare => gameSquare.id==element.id);
+            currentGameSquare.isOccupied = false;
+            currentGameSquare.occupiedColor = "";
             destinationGameSquare.isOccupied = true;
             destinationGameSquare.occupiedColor = token.substring(9);
-        
             var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
             var currentSquareElement = document.getElementById(currentGameSquare.id);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
@@ -254,7 +257,7 @@ function selectAndMovePiece(element){
         document.getElementById("instructions").innerHTML = "Click 'End of Turn' button";
         noPopAllowed = false;
     }
-    checkIfWinner();
+    this.checkIfWinner();
 }
 
 function getDestinationGameSquare(currentSquareId, end){
@@ -401,7 +404,8 @@ function checkIfWinner() {
             homeRowSpotsFilled++;
         } 
     });
-    if(homeRowSpotsFilled===4){
+    console.log("homeRowSpotsFilled: " + homeRowSpotsFilled);
+    if(homeRowSpotsFilled==4){
         this.gameHasWinner = true;
         $('#dialog').dialog({
             title: this.currentPlayer.color + " WINS!",
