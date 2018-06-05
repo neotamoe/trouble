@@ -6,8 +6,6 @@ var redCount="4";
 var players = [];
 var currentPlayer = "";
 var fullPlayers = [];
-var gameHasWinner = false;
-var winner = "";
 var noPopAllowed = true;
 
 $(document).ready(function(){
@@ -31,7 +29,6 @@ function popIt() {
     }
     var die = 1 + Math.floor(Math.random() * 6);
     popperDisplay = die;
-    console.log(popperDisplay);
     $("#btnPopper").text(popperDisplay);
     if(popperDisplay === 6){
         // player able to move out of home or move 6 spaces
@@ -60,7 +57,6 @@ function clearInstructions() {
 }
 
 function toggle(value) {
-    console.log(value);
     if(!players.includes(value)){
         players.push(value);
     } else {
@@ -78,8 +74,7 @@ function play(players) {
     for(var i=0; i < players.length; i++){
         var element = document.getElementById(players[i]);
         element.classList.remove('notPlaying');
-        var color = players[i];
-        switch(color) {
+        switch(players[i]) {
             case "blue":
                 this.fullPlayers[i] = this.bluePlayer;
                 break;
@@ -130,7 +125,6 @@ function clickOnHome(element){
 function placePieceOnStart(startColor) {
     var startGameSquare = this.gameSquares.find(gameSquare => gameSquare.color===startColor && gameSquare.isStart===true);
     var id = startGameSquare.id;
-    console.log(id);
     if(startGameSquare.isOccupied && startGameSquare.occupiedColor===startColor){
         document.getElementById("instructions").innerHTML = "You already have a piece on start.  You cannot move another piece into play.";
         return;
@@ -140,11 +134,12 @@ function placePieceOnStart(startColor) {
         document.getElementById("instructions").innerHTML = opponentColor + " is sent back to home.";
         returnOpponentToHome(opponentColor, id);
     }
+
     switch(startColor) {
         case "blue":
-            if(this.blueCount>0){
-                this.blueCount--;
-                $("#blueCount").text(this.blueCount);
+            if(blueCount>0){
+                blueCount--;
+                $("#blueCount").text(blueCount);
                 $('#'+id).append('<div class="occupied-blue"></div>');
                 startGameSquare.occupiedColor="blue";
                 startGameSquare.isOccupied = true;
@@ -156,9 +151,9 @@ function placePieceOnStart(startColor) {
             }
             break;
         case "red":
-            if(this.redCount>0){
-                this.redCount--;
-                $("#redCount").text(this.redCount);
+            if(redCount>0){
+                redCount--;
+                $("#redCount").text(redCount);
                 $('#'+id).append('<div class="occupied-red"></div>');
                 startGameSquare.occupiedColor="red";
                 startGameSquare.isOccupied = true;
@@ -170,9 +165,9 @@ function placePieceOnStart(startColor) {
             }
             break;
         case "yellow":
-            if(this.yellowCount>0){
-                this.yellowCount--;
-                $("#yellowCount").text(this.yellowCount);
+            if(yellowCount>0){
+                yellowCount--;
+                $("#yellowCount").text(yellowCount);
                 $('#'+id).append('<div class="occupied-yellow"></div>');
                 startGameSquare.occupiedColor="yellow";    
                 startGameSquare.isOccupied = true;
@@ -184,9 +179,9 @@ function placePieceOnStart(startColor) {
             }
             break;
         case "green":
-            if(this.greenCount>0){
-                this.greenCount--;  
-                $("#greenCount").text(this.greenCount);
+            if(greenCount>0){
+                greenCount--;  
+                $("#greenCount").text(greenCount);
                 $('#'+id).append('<div class="occupied-green"></div>');
                 startGameSquare.occupiedColor="green";
                 startGameSquare.isOccupied = true;
@@ -209,13 +204,9 @@ function selectAndMovePiece(element){
         document.getElementById("instructions").innerHTML = "You can't move another player's piece.  Choose a different piece or click 'End of Turn' button";
         return;
     }
-    console.log("element to move: ");
-    console.log(element);
     var start = element.id;
     var end = Number(element.id) + Number(this.popperDisplay);
     var destinationGameSquare = getDestinationGameSquare(start, end);
-    console.log("destinationGameSquare: ");
-    console.log(destinationGameSquare);
     if(destinationGameSquare!==undefined){
         if(destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor==currentPlayer.color){
             document.getElementById("instructions").innerHTML = "You already occupy that square.  Choose a different piece or click 'End of Turn' button";
@@ -350,46 +341,46 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
     document.getElementById("instructions").innerHTML = opponentColor + " is sent back to home.";
     switch(opponentColor){
         case "blue":
-            if(this.blueCount<4){
-                this.blueCount++;
+            if(blueCount<4){
+                blueCount++;
             }
-            $("#blueCount").text(this.blueCount);
+            $("#blueCount").text(blueCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            if(this.blueCount===4){
+            if(blueCount===4){
                 this.bluePlayer.hasTokensOut = false;
             }
             break;
         case "red":
-            if(this.redCount<4){
-                this.redCount++;
+            if(redCount<4){
+                redCount++;
             }
-            $("#redCount").text(this.redCount);
+            $("#redCount").text(redCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            if(this.redCount===4){
+            if(redCount===4){
                 this.redPlayer.hasTokensOut = false;
             }
             break;
         case "yellow":
-            if(this.yellowCount<4){
-                this.yellowCount++;
+            if(yellowCount<4){
+                yellowCount++;
             }
-            $("#yellowCount").text(this.yellowCount);
+            $("#yellowCount").text(yellowCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            if(this.yellowCount===4){
+            if(yellowCount===4){
                 this.yellowPlayer.hasTokensOut = false;
             }
             break;
         case "green":
-            if(this.greenCount<4){
-                this.greenCount++; 
+            if(greenCount<4){
+                greenCount++; 
             }
-            $("#greenCount").text(this.greenCount);
+            $("#greenCount").text(greenCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            if(this.greenCount===4){
+            if(greenCount===4){
                 this.greenPlayer.hasTokensOut = false;
             }
             break;
@@ -405,7 +396,6 @@ function checkIfWinner() {
         } 
     });
     if(homeRowSpotsFilled==4){
-        this.gameHasWinner = true;
         $('#dialog').dialog({
             title: this.currentPlayer.color.toUpperCase() + " WINS!",
             modal: true,
