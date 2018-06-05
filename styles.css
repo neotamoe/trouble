@@ -98,6 +98,7 @@ input {
     width: 30px;
     height: 30px;
     margin-left: 18px;
+    border-radius: 50%;
 }
 
 .occupied-green {
@@ -106,6 +107,7 @@ input {
     width: 30px;
     height: 30px;
     margin-left: 18px;
+    border-radius: 50%;
 }
 
 .occupied-red {
@@ -114,6 +116,7 @@ input {
     width: 30px;
     height: 30px;
     margin-left: 18px;
+    border-radius: 50%;
 }
 
 .occupied-yellow {
@@ -122,6 +125,7 @@ input {
     width: 30px;
     height: 30px;
     margin-left: 18px;
+    border-radius: 50%;
 }
 
 button:focus {

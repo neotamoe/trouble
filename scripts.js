@@ -404,15 +404,14 @@ function checkIfWinner() {
             homeRowSpotsFilled++;
         } 
     });
-    console.log("homeRowSpotsFilled: " + homeRowSpotsFilled);
     if(homeRowSpotsFilled==4){
         this.gameHasWinner = true;
         $('#dialog').dialog({
-            title: this.currentPlayer.color + " WINS!",
+            title: this.currentPlayer.color.toUpperCase() + " WINS!",
             modal: true,
         });
     }
-}
+};
 
 function Player(color, startSquare, homeRow) {
     this.color = color;
