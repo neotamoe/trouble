@@ -353,7 +353,6 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
             $("#blueCount").text(this.blueCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            // $('#'+opponentSquareId).remove('<div class="occupied-blue"></div>');
             if(this.blueCount===4){
                 this.bluePlayer.hasTokensOut = false;
             }
@@ -365,7 +364,6 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
             $("#redCount").text(this.redCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            // $('#'+opponentSquareId).remove('<div class="occupied-red"></div>');
             if(this.redCount===4){
                 this.redPlayer.hasTokensOut = false;
             }
@@ -377,7 +375,6 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
             $("#yellowCount").text(this.yellowCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            // $('#'+opponentSquareId).remove('<div class="occupied-yellow"></div>');
             if(this.yellowCount===4){
                 this.yellowPlayer.hasTokensOut = false;
             }
@@ -389,7 +386,6 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
             $("#greenCount").text(this.greenCount);
             var currentSquareElement = document.getElementById(opponentSquareId);
             currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
-            // $('#'+opponentSquareId).remove('<div class="occupied-green"></div>');  // this isn't removing the piece
             if(this.greenCount===4){
                 this.greenPlayer.hasTokensOut = false;
             }
