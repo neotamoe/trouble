@@ -22,7 +22,7 @@ function popIt() {
     if(!this.currentPlayer){
         return;
     }
-    if(noPopAllowed){
+    if(noPopAllowed && popperDisplay!=6){
         return;
     }
     if(popperDisplay!=="POP" && popperDisplay!=6){
@@ -409,6 +409,9 @@ function checkIfWinner() {
         $('#dialog').dialog({
             title: this.currentPlayer.color.toUpperCase() + " WINS!",
             modal: true,
+            close: function() {
+                location.reload();
+            }
         });
     }
 };
