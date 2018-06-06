@@ -202,8 +202,7 @@ function selectAndMovePiece(element){
         }
         else if (destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor!==currentPlayer.color){
             var currentGameSquare = gameSquares.find(gameSquare => gameSquare.id==element.id);
-            currentGameSquare.isOccupied = false;
-            currentGameSquare.occupiedColor = "";
+            removePiecePropertiesFromCurrentGameSquare(currentGameSquare);
             var opponentColor = destinationGameSquare.occupiedColor;
             returnOpponentToHome(opponentColor, destinationGameSquare.id);
             
@@ -214,8 +213,7 @@ function selectAndMovePiece(element){
             $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
         } else {
             var currentGameSquare = gameSquares.find(gameSquare => gameSquare.id==element.id);
-            currentGameSquare.isOccupied = false;
-            currentGameSquare.occupiedColor = "";
+            removePiecePropertiesFromCurrentGameSquare(currentGameSquare);
             destinationGameSquare.isOccupied = true;
             destinationGameSquare.occupiedColor = token.substring(9);
             var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
@@ -235,6 +233,11 @@ function selectAndMovePiece(element){
         noPopAllowed = false;
     }
     this.checkIfWinner();
+}
+
+function removePiecePropertiesFromCurrentGameSquare(currentGameSquare){
+    currentGameSquare.isOccupied = false;
+    currentGameSquare.occupiedColor = "";
 }
 
 function getDestinationGameSquare(currentSquareId, end){
