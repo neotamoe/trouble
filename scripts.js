@@ -203,22 +203,14 @@ function selectAndMovePiece(element){
         else if (destinationGameSquare.isOccupied===true && destinationGameSquare.occupiedColor!==currentPlayer.color){
             var currentGameSquare = gameSquares.find(gameSquare => gameSquare.id==element.id);
             removePiecePropertiesFromCurrentGameSquare(currentGameSquare);
-            var opponentColor = destinationGameSquare.occupiedColor;
-            returnOpponentToHome(opponentColor, destinationGameSquare.id);
-            
-            destinationGameSquare.isOccupied = true;
-            destinationGameSquare.occupiedColor = token.substring(9);
-            var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
+            returnOpponentToHome(destinationGameSquare.occupiedColor, destinationGameSquare.id);            
             removePieceFromBoard(currentGameSquare.id);
-            $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
+            addPieceAndUpdateDestinationGameSquareProperties(destinationGameSquare, token);
         } else {
             var currentGameSquare = gameSquares.find(gameSquare => gameSquare.id==element.id);
             removePiecePropertiesFromCurrentGameSquare(currentGameSquare);
-            destinationGameSquare.isOccupied = true;
-            destinationGameSquare.occupiedColor = token.substring(9);
-            var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
             removePieceFromBoard(currentGameSquare.id);
-            $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
+            addPieceAndUpdateDestinationGameSquareProperties(destinationGameSquare, token);
         }
 
     } else {
@@ -232,7 +224,14 @@ function selectAndMovePiece(element){
         updateInstructions("Click 'End of Turn' button");
         noPopAllowed = false;
     }
-    this.checkIfWinner();
+    checkIfWinner();
+}
+
+function addPieceAndUpdateDestinationGameSquareProperties(destinationGameSquare, token){
+    destinationGameSquare.isOccupied = true;
+    destinationGameSquare.occupiedColor = token.substring(9);
+    var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
+    $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
 }
 
 function removePiecePropertiesFromCurrentGameSquare(currentGameSquare){
@@ -240,86 +239,53 @@ function removePiecePropertiesFromCurrentGameSquare(currentGameSquare){
     currentGameSquare.occupiedColor = "";
 }
 
+function calculateDestinationSquareId(currentSquareId, end, homeRowTurn, homeRowTurnAsHomeRow, firstHomeRowSpot, lastHomeRowSpot){
+    var destinationId;
+    if(end>homeRowTurn && currentSquareId<=homeRowTurn){
+        var homeSlot = end-homeRowTurn;
+        if(homeSlot>4){
+            updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
+        } else {
+            destinationId = homeRowTurnAsHomeRow + homeSlot; 
+        }
+    } else if (currentSquareId>=firstHomeRowSpot){
+        if(end>lastHomeRowSpot){
+            updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
+        } else {
+            destinationId = end;
+        } 
+    } else {
+        destinationId = end;
+    }
+    return destinationId;
+}
+
 function getDestinationGameSquare(currentSquareId, end){
     var destinationId = 0;
     switch(currentPlayer.color) {
         case "blue":
-            if(end>28 && currentSquareId<=28){
-                var homeSlot = end-28;
-                if(homeSlot>4){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = 280 + homeSlot;     
-                }
-            } else if (currentSquareId>=281){
-                if(end>284){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = end;
-                }
-            } else {
-                destinationId = end;
-            }
+            destinationId = calculateDestinationSquareId(currentSquareId, end, 28, 280, 281, 284);
             break;
         case "red":
             if(end>28 && currentSquareId<=28){
                 destinationId = end - 28;
-            } else if(end>7 && currentSquareId<=7){
-                var homeSlot = end-7;
-                if(homeSlot>4){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = 70 + homeSlot; 
-                }
-            } else if (currentSquareId>=71){
-                if(end>74){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = end;
-                } 
             } else {
-                destinationId = end;
+                destinationId = calculateDestinationSquareId(currentSquareId, end, 7, 70, 71, 74)
             }
             break;
         case "yellow":
             if(end>28 && currentSquareId<=28){
                 destinationId = end - 28;
-            } else if(end>14 && currentSquareId<=14){
-                var homeSlot = end-14;
-                if(homeSlot>4){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = 140 + homeSlot; 
-                }
-            } else if (currentSquareId>=141){
-                if(end>144){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = end;
-                } 
             } else {
-                destinationId = end;
+                destinationId = calculateDestinationSquareId(currentSquareId, end, 14, 140, 141, 144);
             }
             break;
         case "green":
             if(end>28 && currentSquareId<=28){
                 destinationId = end - 28;
-            } else if(end>21 && currentSquareId<=21){
-                var homeSlot = end-21;
-                if(homeSlot>4){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = 210 + homeSlot; 
-                }
-            } else if (currentSquareId>=211){
-                if(end>214){
-                    updateInstructions("You must go into a home spot by exact count.  Choose another piece to move or if no available moves click 'End of Turn' button");
-                } else {
-                    destinationId = end;
-                }
             } else {
-                destinationId = end;
-            }
+                destinationId = calculateDestinationSquareId(currentSquareId, end, 21, 210, 211, 214);
+            } 
             break;
     }     
     var destinationGameSquare = gameSquares.find(gameSquare => gameSquare.id==destinationId);
@@ -374,7 +340,7 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
 
 function checkIfWinner() {
     var homeRowSpotsFilled = 0;
-    this.currentPlayer.homeRow.forEach(element => {
+    currentPlayer.homeRow.forEach(element => {
         var homeRowGameSquare = gameSquares.find(gameSquare => gameSquare.id==element && gameSquare.isHomeRow==true);
         if(homeRowGameSquare.isOccupied){
             homeRowSpotsFilled++;
