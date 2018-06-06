@@ -74,19 +74,14 @@ function play(players) {
     for(var i=0; i < players.length; i++){
         var element = document.getElementById(players[i]);
         element.classList.remove('notPlaying');
-        switch(players[i]) {
-            case "blue":
-                fullPlayers[i] = bluePlayer;
-                break;
-            case "red":
-                fullPlayers[i] = redPlayer;
-                break;
-            case "yellow":
-                fullPlayers[i] = yellowPlayer;
-                break;
-            case "green":
-                fullPlayers[i] = greenPlayer;
-                break;
+        if(players[i]=="blue"){
+            fullPlayers[i] = bluePlayer;            
+        } else if (players[i]=="red"){
+            fullPlayers[i] = redPlayer;
+        } else if (players[i]=="yellow"){
+            fullPlayers[i] = yellowPlayer;
+        } else if (players[i]=="green"){
+            fullPlayers[i] = greenPlayer;
         }
     }
     $('#currentPlayer').addClass(players[0]);
