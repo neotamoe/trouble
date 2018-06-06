@@ -217,8 +217,7 @@ function selectAndMovePiece(element){
             destinationGameSquare.isOccupied = true;
             destinationGameSquare.occupiedColor = token.substring(9);
             var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
-            var currentSquareElement = document.getElementById(currentGameSquare.id);
-            currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+            removePieceFromBoard(currentGameSquare.id);
             $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
         } else {
             var currentGameSquare = gameSquares.find(gameSquare => gameSquare.id==element.id);
@@ -227,8 +226,7 @@ function selectAndMovePiece(element){
             destinationGameSquare.isOccupied = true;
             destinationGameSquare.occupiedColor = token.substring(9);
             var occupiedColor = "occupied-" + destinationGameSquare.occupiedColor;
-            var currentSquareElement = document.getElementById(currentGameSquare.id);
-            currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+            removePieceFromBoard(currentGameSquare.id);
             $('#'+destinationGameSquare.id).append('<div class="'+occupiedColor+'"></div>');
         }
 
@@ -340,8 +338,7 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
                 blueCount++;
             }
             $("#blueCount").text(blueCount);
-            var currentSquareElement = document.getElementById(opponentSquareId);
-            currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+            removePieceFromBoard(opponentSquareId);
             if(blueCount===4){
                 bluePlayer.hasTokensOut = false;
             }
@@ -351,8 +348,7 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
                 redCount++;
             }
             $("#redCount").text(redCount);
-            var currentSquareElement = document.getElementById(opponentSquareId);
-            currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+            removePieceFromBoard(opponentSquareId);
             if(redCount===4){
                 redPlayer.hasTokensOut = false;
             }
@@ -362,8 +358,7 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
                 yellowCount++;
             }
             $("#yellowCount").text(yellowCount);
-            var currentSquareElement = document.getElementById(opponentSquareId);
-            currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+            removePieceFromBoard(opponentSquareId);
             if(yellowCount===4){
                 yellowPlayer.hasTokensOut = false;
             }
@@ -373,8 +368,7 @@ function returnOpponentToHome(opponentColor, opponentSquareId) {
                 greenCount++; 
             }
             $("#greenCount").text(greenCount);
-            var currentSquareElement = document.getElementById(opponentSquareId);
-            currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+            removePieceFromBoard(opponentSquareId);
             if(greenCount===4){
                 greenPlayer.hasTokensOut = false;
             }
@@ -400,6 +394,11 @@ function checkIfWinner() {
         });
     }
 };
+
+function removePieceFromBoard(pieceSquareId){   
+    var currentSquareElement = document.getElementById(pieceSquareId);
+    currentSquareElement.removeChild(currentSquareElement.childNodes[0]);
+}
 
 function Player(color, startSquare, homeRow) {
     this.color = color;
